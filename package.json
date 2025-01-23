@@ -5,10 +5,13 @@
   "scripts": {
     "start": "node src/server.js",
     "migrate": "docker compose exec app npx sequelize-cli db:migrate",
+    "migrate:rollback": "docker compose exec app npx sequelize-cli db:migrate:undo",
     "migrate:make": "npx sequelize-cli migration:generate --name",
-    "in:db": "docker compose exec pg_db psql postgres postgres",
-    "in:app": "docker compose exec app sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed": "npm run seed:down && docker compose exec app npx sequelize-cli db:seed:all",
+    "seed:down": "docker compose exec app npx sequelize-cli db:seed:undo:all",
+    "seed:make": "npx sequelize-cli seed:generate --name",
+    "in:db": "docker compose exec pg_db psql dev_db postgres",
+    "in:app": "docker compose exec app sh"
   },
   "keywords": [],
   "author": "",

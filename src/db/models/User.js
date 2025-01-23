@@ -7,13 +7,28 @@ const modelProperties = {
 };
 
 class User extends Model {
+  // this method avoids circular dependencies
   static associate(models) {
-    // define association here
+    User.belongsTo(models.Role, {
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    })
   }
 
-  test() {
-    this.firstName = 'ok wow'
-    this.save();
+  static async createOne(firstName, lastName, role_id) {
+    return await this.create({ firstName, lastName, role_id });
+  }
+
+  async getRoleAndPerms() {
+    const role = await this.getRole()
+    const perms = await role.getAllPerms(true);
+    return { role: role.name, perms }
+  }
+
+  async formattedJson() {
+    const { id, firstName, lastName } = this;
+    const { role, perms } = await this.getRoleAndPerms();
+    return { id, firstName, lastName, role, perms };
   }
 }
 

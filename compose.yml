@@ -14,7 +14,6 @@ services:
       context: .
     command: node --watch ./src/server.js
     environment:
-      DB_SCHEMA: public
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_HOST: pg_db

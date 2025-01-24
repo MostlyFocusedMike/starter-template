@@ -10,7 +10,7 @@ const dbConnectOpts = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   dialect: 'postgres',
-  dialectOptions: { ssl: process.env.DB_SSL == "true" }
+  dialectOptions: { ssl: process.env.DB_SSL === "true" }
 }
 
 const sequelize = new Sequelize(

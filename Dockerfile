@@ -15,6 +15,9 @@ RUN npm i
 # this copies everything you need into from local into your docker container to start
 COPY ./src ./src/
 COPY ./.sequelizerc ./.sequelizerc
+COPY ./tsconfig.json ./tsconfig.json
 # COPY ./dist ./dist/
 
-CMD ["node", "./src/server.js"]
+RUN npm run build
+
+CMD ["npm", "start"]

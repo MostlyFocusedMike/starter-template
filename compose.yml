@@ -12,7 +12,7 @@ services:
   app:
     build:
       context: .
-    command: node --watch ./src/server.js
+    command: npm run dev
     environment:
       DB_USER: postgres
       DB_PASSWORD: postgres

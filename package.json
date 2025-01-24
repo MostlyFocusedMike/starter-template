@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node src/server.ts",
+    "build": "npx tsc",
+    "dev": "npx concurrently 'node --watch dist/server.js' 'npx tsc --watch'",
     "migrate": "docker compose exec app npx sequelize-cli db:migrate",
     "migrate:rollback": "docker compose exec app npx sequelize-cli db:migrate:undo",
     "migrate:make": "npx sequelize-cli migration:generate --name",
@@ -18,11 +20,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.10",
     "express": "^5.0.1",
     "pg": "^8.13.1",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "sequelize-cli": "^6.6.2"
   }
 }
